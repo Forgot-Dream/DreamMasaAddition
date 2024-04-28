@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.forgotdream.dma.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "KeyboardHandlerMixin",
+    "WindowAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

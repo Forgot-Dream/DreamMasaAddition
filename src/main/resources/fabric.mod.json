@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "dma",
+  "version": "${version}",
+  "name": "DreamMasaAddition",
+  "description": "Just Something Interesting.",
+  "authors": [
+    "Forgot_Dream"
+  ],
+  "contact": {
+    "website": "https://github.com/Forgot-Dream/DreamMasaAddition",
+    "repo": "https://github.com/Forgot-Dream/DreamMasaAddition"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/dma/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.forgotdream.dma.DreamMasaAddition"
+    ]
+  },
+  "mixins": [
+    "dma.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": ">=${minecraft_version}"
+  }
+}

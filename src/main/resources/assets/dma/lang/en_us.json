@@ -1,0 +1,4 @@
+{
+  "dma.debug.resize_window.off": "Now the game window can not be resized.",
+  "dma.debug.resize_window.on": "Now the game window can be resized."
+}
