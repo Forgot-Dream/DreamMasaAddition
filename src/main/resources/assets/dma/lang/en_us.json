@@ -1,4 +1,6 @@
 {
-  "dma.debug.resize_window.off": "Now the game window can not be resized.",
-  "dma.debug.resize_window.on": "Now the game window can be resized."
+  "dma.gui.title.configs": "Dream Masa Addition - Config - Version: %s",
+  "dma.gui.button.tab.feature_toggle": "Feature Toggles",
+  "dma.config.feature_toggle.windowResizable.name": "windowResizable",
+  "dma.config.feature_toggle.windowResizable.comment": "Set whether the game window size can be changed."
 }

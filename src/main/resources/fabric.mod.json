@@ -17,6 +17,9 @@
   "entrypoints": {
     "main": [
       "dev.forgotdream.dma.DreamMasaAddition"
+    ],
+    "modmenu": [
+      "dev.forgotdream.dma.compat.ModMenuApiImpl"
     ]
   },
   "mixins": [
@@ -24,6 +27,8 @@
   ],
   "depends": {
     "fabricloader": "*",
+    "malilib": "*",
+    "magiclib": "*",
     "minecraft": ">=${minecraft_version}"
   }
 }

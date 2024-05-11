@@ -1,4 +1,6 @@
 {
-  "dma.debug.resize_window.off": "现在游戏窗口无法调整大小",
-  "dma.debug.resize_window.on": "现在游戏窗口可以调整大小"
+  "dma.gui.title.configs": "Dream Masa Addition - 设置 - 版本: %s",
+  "dma.gui.button.tab.feature_toggle": "特性开关",
+  "dma.config.feature_toggle.windowResizable.name": "游戏窗口大小可变",
+  "dma.config.feature_toggle.windowResizable.comment": "设置游戏窗口大小是否可以改变"
 }

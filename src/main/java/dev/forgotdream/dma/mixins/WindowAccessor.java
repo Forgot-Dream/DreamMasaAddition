@@ -8,5 +8,5 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface WindowAccessor {
 
     @Accessor("window")
-    public long getWindow();
+    long getWindow();
 }
