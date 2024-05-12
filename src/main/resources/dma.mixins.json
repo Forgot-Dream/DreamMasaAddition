@@ -4,8 +4,10 @@
   "package": "dev.forgotdream.dma.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "RecipePatternAccessor"
   ],
   "client": [
+    "RecipeBookComponentMixin",
     "WindowAccessor"
   ],
   "injectors": {

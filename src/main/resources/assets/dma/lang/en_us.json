@@ -2,5 +2,7 @@
   "dma.gui.title.configs": "Dream Masa Addition - Config - Version: %s",
   "dma.gui.button.tab.feature_toggle": "Feature Toggles",
   "dma.config.feature_toggle.windowResizable.name": "windowResizable",
-  "dma.config.feature_toggle.windowResizable.comment": "Set whether the game window size can be changed."
+  "dma.config.feature_toggle.windowResizable.comment": "Set whether the game window size can be changed.",
+  "dma.config.feature_toggle.quickCraftWithRecipeBook.name": "quickCraftWithRecipeBook",
+  "dma.config.feature_toggle.quickCraftWithRecipeBook.comment": "Holding Shift and clicking on a recipe item in the RecipeBook will craft all available items in your inventory into that item at once. This feature relies on the ItemScroller."
 }

@@ -10,6 +10,10 @@ base {
     archivesName = project.archives_base_name
 }
 
+loom{
+    accessWidenerPath=file("src/main/resources/dma.accesswidener")
+}
+
 repositories {
     // Add repositories to retrieve artifacts from in here.
     // You should only use this when depending on other mods because
@@ -64,6 +68,8 @@ dependencies {
         exclude(group: "carpet", module: "fabric-carpet")
     }
     modCompileOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
+
+    modApi("curse.maven:itemscroller-242064:${project.itemscroller_version}")
 }
 
 processResources {

@@ -1,9 +1,12 @@
 package dev.forgotdream.dma.config;
 
+import dev.forgotdream.dma.Reference;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import net.minecraft.client.Minecraft;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
 import top.hendrixshen.magiclib.malilib.api.annotation.Config;
 import top.hendrixshen.magiclib.malilib.api.annotation.Hotkey;
 import top.hendrixshen.magiclib.malilib.impl.ConfigHandler;
@@ -13,6 +16,10 @@ public class Configs {
     @Hotkey
     @Config(category = ConfigCategory.FEATURE_TOGGLE)
     public static boolean windowResizable = true;
+
+    @Hotkey
+    @Config(category = ConfigCategory.FEATURE_TOGGLE,dependencies = @Dependencies(and = @Dependency(Reference.ITEMSCROLLER_MOD_ID)))
+    public static boolean quickCraftWithRecipeBook = false;
 
     public static void init(@NotNull ConfigManager cm) {
         cm.setValueChangeCallback("windowResizable", configOption -> {
