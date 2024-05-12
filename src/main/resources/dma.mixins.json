@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "dev.forgotdream.dma.mixins",
   "compatibilityLevel": "JAVA_17",
+  "plugin": "top.hendrixshen.magiclib.dependency.impl.MagicMixinPlugin",
   "mixins": [
     "RecipePatternAccessor"
   ],
