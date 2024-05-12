@@ -1,5 +1,6 @@
 package dev.forgotdream.dma.mixins;
 
+import dev.forgotdream.dma.Reference;
 import dev.forgotdream.dma.config.Configs;
 import fi.dy.masa.itemscroller.recipes.RecipePattern;
 import fi.dy.masa.itemscroller.util.InventoryUtils;
@@ -21,9 +22,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
+import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
 
 import java.util.Objects;
 
+@Dependencies(and = @Dependency(Reference.ITEMSCROLLER_MOD_ID))
 @Mixin(RecipeBookComponent.class)
 public abstract class RecipeBookComponentMixin {
     @Shadow
