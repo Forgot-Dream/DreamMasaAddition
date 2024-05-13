@@ -1,8 +1,16 @@
 {
   "dma.gui.title.configs": "Dream Masa Addition - Config - Version: %s",
+
   "dma.gui.button.tab.feature_toggle": "Feature Toggles",
+  "dma.gui.button.tab.lists": "Lists",
+
   "dma.config.feature_toggle.windowResizable.name": "windowResizable",
   "dma.config.feature_toggle.windowResizable.comment": "Set whether the game window size can be changed.",
   "dma.config.feature_toggle.quickCraftWithRecipeBook.name": "quickCraftWithRecipeBook",
-  "dma.config.feature_toggle.quickCraftWithRecipeBook.comment": "Holding Shift and clicking on a recipe item in the RecipeBook will craft all available items in your inventory into that item at once. This feature relies on the ItemScroller."
+  "dma.config.feature_toggle.quickCraftWithRecipeBook.comment": "Holding Shift and clicking on a recipe item in the RecipeBook will craft all available items in your inventory into that item at once. This feature relies on the ItemScroller.",
+  "dma.config.feature_toggle.ignoreSpecNBTTagsWhenSort.name": "ignoreSpecNBTTagsWhenSort",
+  "dma.config.feature_toggle.ignoreSpecNBTTagsWhenSort.comment": "When using OMMC, ignore items with specified NBT tags when sorting items.",
+
+  "dma.config.lists.ignoreSpecNBTTagsList.name": "ignoreSpecNBTTagsList",
+  "dma.config.lists.ignoreSpecNBTTagsList.comment": "Names of NBT tags to ignore when sorting. Items with tags of these names will be ignored."
 }

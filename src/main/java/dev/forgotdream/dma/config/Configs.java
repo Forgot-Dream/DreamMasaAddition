@@ -1,5 +1,6 @@
 package dev.forgotdream.dma.config;
 
+import com.google.common.collect.Lists;
 import dev.forgotdream.dma.Reference;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import net.minecraft.client.Minecraft;
@@ -12,6 +13,8 @@ import top.hendrixshen.magiclib.malilib.api.annotation.Hotkey;
 import top.hendrixshen.magiclib.malilib.impl.ConfigHandler;
 import top.hendrixshen.magiclib.malilib.impl.ConfigManager;
 
+import java.util.ArrayList;
+
 public class Configs {
     @Hotkey
     @Config(category = ConfigCategory.FEATURE_TOGGLE)
@@ -20,6 +23,13 @@ public class Configs {
     @Hotkey
     @Config(category = ConfigCategory.FEATURE_TOGGLE,dependencies = @Dependencies(and = @Dependency(Reference.ITEMSCROLLER_MOD_ID)))
     public static boolean quickCraftWithRecipeBook = false;
+
+    @Hotkey
+    @Config(category = ConfigCategory.FEATURE_TOGGLE,dependencies = @Dependencies(and = @Dependency(Reference.OMMC_MOD_ID)))
+    public static boolean ignoreSpecNBTTagsWhenSort = false;
+
+    @Config(category = ConfigCategory.LISTS,dependencies = @Dependencies(and = @Dependency(Reference.OMMC_MOD_ID)))
+    public static ArrayList<String> ignoreSpecNBTTagsList = Lists.newArrayList("GcaClear");
 
     public static void init(@NotNull ConfigManager cm) {
         cm.setValueChangeCallback("windowResizable", configOption -> {
@@ -37,7 +47,7 @@ public class Configs {
     public static class ConfigCategory {
         //        public static final String GENERIC = "generic";
         public static final String FEATURE_TOGGLE = "feature_toggle";
-//        public static final String LISTS = "lists";
+        public static final String LISTS = "lists";
 //        public static final String ADVANCED_INTEGRATED_SERVER = "advanced_integrated_server";
     }
 }

@@ -1,8 +1,16 @@
 {
   "dma.gui.title.configs": "Dream Masa Addition - 设置 - 版本: %s",
+
   "dma.gui.button.tab.feature_toggle": "特性开关",
+  "dma.gui.button.tab.lists": "列表",
+
   "dma.config.feature_toggle.windowResizable.name": "游戏窗口大小可变",
   "dma.config.feature_toggle.windowResizable.comment": "设置游戏窗口大小是否可以改变",
   "dma.config.feature_toggle.quickCraftWithRecipeBook.name": "合成书快速合成",
-  "dma.config.feature_toggle.quickCraftWithRecipeBook.comment": "按住Shift单击合成书中的表项时，会一次性将背包内可用物品全部合成为该表项。此功能依赖于ItemScroller。"
+  "dma.config.feature_toggle.quickCraftWithRecipeBook.comment": "按住Shift单击合成书中的表项时，会一次性将背包内可用物品全部合成为该表项。此功能依赖于ItemScroller。",
+  "dma.config.feature_toggle.ignoreSpecNBTTagsWhenSort.name": "整理物品时忽略指定NBT标签的物品",
+  "dma.config.feature_toggle.ignoreSpecNBTTagsWhenSort.comment": "使用OMMC时，整理物品时忽略指定NBT标签的物品",
+
+  "dma.config.lists.ignoreSpecNBTTagsList.name": "整理时忽略的NBT标签",
+  "dma.config.lists.ignoreSpecNBTTagsList.comment": "整理时忽略的NBT标签名字，如果物品含有该名字的标签，则忽略。"
 }

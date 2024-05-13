@@ -46,6 +46,7 @@ repositories {
 
         content {
             includeGroup("com.github.Nyan-Work")
+            includeGroup("com.github.Nyan-Work.oh-my-minecraft-client")
         }
     }
 }
@@ -70,6 +71,7 @@ dependencies {
     modCompileOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
 
     modApi("curse.maven:itemscroller-242064:${project.itemscroller_version}")
+    modApi("com.github.Nyan-Work.oh-my-minecraft-client:ommc-${project.minecraft_version.replace(".", "_")}:${project.ommc_version}")
 }
 
 processResources {
