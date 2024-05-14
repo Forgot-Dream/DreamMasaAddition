@@ -3,6 +3,7 @@
 
   "dma.gui.button.tab.feature_toggle": "Feature Toggles",
   "dma.gui.button.tab.lists": "Lists",
+  "dma.gui.button.tab.fixes": "Fixes",
 
   "dma.config.feature_toggle.windowResizable.name": "windowResizable",
   "dma.config.feature_toggle.windowResizable.comment": "Set whether the game window size can be changed.",
@@ -12,5 +13,8 @@
   "dma.config.feature_toggle.ignoreSpecNBTTagsWhenSort.comment": "When using OMMC, ignore items with specified NBT tags when sorting items.",
 
   "dma.config.lists.ignoreSpecNBTTagsList.name": "ignoreSpecNBTTagsList",
-  "dma.config.lists.ignoreSpecNBTTagsList.comment": "Names of NBT tags to ignore when sorting. Items with tags of these names will be ignored."
+  "dma.config.lists.ignoreSpecNBTTagsList.comment": "Names of NBT tags to ignore when sorting. Items with tags of these names will be ignored.",
+
+  "dma.config.fixes.fixTweakerooGammaOverride.name": "fixTweakerooGammaOverride",
+  "dma.config.fixes.fixTweakerooGammaOverride.comment": "Fixed the issue that Tweakeroo's gamma override did not take effect when the client was launched."
 }

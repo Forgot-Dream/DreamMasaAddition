@@ -34,10 +34,6 @@ public class Configs {
     @Config(category = ConfigCategory.FIXES, dependencies = @Dependencies(and = @Dependency(Reference.TWEAKEROO_MOD_ID)))
     public static boolean fixTweakerooGammaOverride = true;
 
-    @Config(category = ConfigCategory.FIXES)
-    public static boolean fixMalilibStringListRender = true;
-
-
     public static void init(@NotNull ConfigManager cm) {
         cm.setValueChangeCallback("windowResizable", configOption -> {
             long window = Minecraft.getInstance().getWindow().getWindow();

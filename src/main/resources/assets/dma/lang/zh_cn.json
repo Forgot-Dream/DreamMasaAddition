@@ -3,6 +3,7 @@
 
   "dma.gui.button.tab.feature_toggle": "特性开关",
   "dma.gui.button.tab.lists": "列表",
+  "dma.gui.button.tab.fixes": "修复",
 
   "dma.config.feature_toggle.windowResizable.name": "游戏窗口大小可变",
   "dma.config.feature_toggle.windowResizable.comment": "设置游戏窗口大小是否可以改变",
@@ -12,5 +13,8 @@
   "dma.config.feature_toggle.ignoreSpecNBTTagsWhenSort.comment": "使用OMMC时，整理物品时忽略指定NBT标签的物品",
 
   "dma.config.lists.ignoreSpecNBTTagsList.name": "整理时忽略的NBT标签",
-  "dma.config.lists.ignoreSpecNBTTagsList.comment": "整理时忽略的NBT标签名字，如果物品含有该名字的标签，则忽略。"
+  "dma.config.lists.ignoreSpecNBTTagsList.comment": "整理时忽略的NBT标签名字，如果物品含有该名字的标签，则忽略。",
+
+  "dma.config.fixes.fixTweakerooGammaOverride.name": "修复伽马覆写不生效",
+  "dma.config.fixes.fixTweakerooGammaOverride.comment": "修复客户端启动的时候，Tweakeroo的伽马覆写不生效的问题。"
 }
