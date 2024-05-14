@@ -21,15 +21,22 @@ public class Configs {
     public static boolean windowResizable = true;
 
     @Hotkey
-    @Config(category = ConfigCategory.FEATURE_TOGGLE,dependencies = @Dependencies(and = @Dependency(Reference.ITEMSCROLLER_MOD_ID)))
+    @Config(category = ConfigCategory.FEATURE_TOGGLE, dependencies = @Dependencies(and = @Dependency(Reference.ITEMSCROLLER_MOD_ID)))
     public static boolean quickCraftWithRecipeBook = false;
 
     @Hotkey
-    @Config(category = ConfigCategory.FEATURE_TOGGLE,dependencies = @Dependencies(and = @Dependency(Reference.OMMC_MOD_ID)))
+    @Config(category = ConfigCategory.FEATURE_TOGGLE, dependencies = @Dependencies(and = @Dependency(Reference.OMMC_MOD_ID)))
     public static boolean ignoreSpecNBTTagsWhenSort = false;
 
-    @Config(category = ConfigCategory.LISTS,dependencies = @Dependencies(and = @Dependency(Reference.OMMC_MOD_ID)))
+    @Config(category = ConfigCategory.LISTS, dependencies = @Dependencies(and = @Dependency(Reference.OMMC_MOD_ID)))
     public static ArrayList<String> ignoreSpecNBTTagsList = Lists.newArrayList("GcaClear");
+
+    @Config(category = ConfigCategory.FIXES, dependencies = @Dependencies(and = @Dependency(Reference.TWEAKEROO_MOD_ID)))
+    public static boolean fixTweakerooGammaOverride = true;
+
+    @Config(category = ConfigCategory.FIXES)
+    public static boolean fixMalilibStringListRender = true;
+
 
     public static void init(@NotNull ConfigManager cm) {
         cm.setValueChangeCallback("windowResizable", configOption -> {
@@ -48,6 +55,7 @@ public class Configs {
         //        public static final String GENERIC = "generic";
         public static final String FEATURE_TOGGLE = "feature_toggle";
         public static final String LISTS = "lists";
+        public static final String FIXES = "fixes";
 //        public static final String ADVANCED_INTEGRATED_SERVER = "advanced_integrated_server";
     }
 }

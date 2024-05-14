@@ -15,7 +15,7 @@
   "icon": "assets/dma/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "client": [
       "dev.forgotdream.dma.DreamMasaAddition"
     ],
     "modmenu": [

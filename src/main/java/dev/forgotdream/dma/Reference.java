@@ -16,7 +16,9 @@ public class Reference {
     public static final String MOD_VERSION = StringUtils.getModVersionString(MOD_ID);
 
     public static final String ITEMSCROLLER_MOD_ID = "itemscroller";
+    public static final String TWEAKEROO_MOD_ID = "tweakeroo";
     public static final String OMMC_MOD_ID = "ommc";
+
 
     @Getter
     private static final Logger logger = LogManager.getLogger(MOD_ID);
