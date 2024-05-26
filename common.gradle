@@ -1,0 +1,143 @@
+apply plugin: 'maven-publish'
+apply plugin: 'fabric-loom'
+apply plugin: 'com.replaymod.preprocess'
+
+preprocess {
+    tabIndentation = true
+}
+
+group(project.maven_group)
+version(project.parent.version)
+
+base {
+    archivesName.set("${project.archives_base_name}-${project.minecraft_version}-${project.mod_version}")
+}
+
+//loom{
+//    accessWidenerPath=file("src/main/resources/dma.accesswidener")
+//}
+
+repositories {
+    // Add repositories to retrieve artifacts from in here.
+    // You should only use this when depending on other mods because
+    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
+    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
+    // for more information about repositories.
+    maven { url 'https://masa.dy.fi/maven' }
+    maven { url 'https://maven.terraformersmc.com/releases/' }
+    maven {
+        name("Curse Maven")
+        url("https://www.cursemaven.com")
+
+        content {
+            includeGroup("curse.maven")
+        }
+    }
+
+    maven {
+        name("Modrinth Maven")
+        url("https://api.modrinth.com/maven")
+
+        content {
+            includeGroup("maven.modrinth")
+        }
+    }
+
+    maven {
+        name("Jitpack Maven")
+        url("https://jitpack.io")
+
+        content {
+            includeGroup("com.github.Nyan-Work")
+            includeGroup("com.github.Nyan-Work.oh-my-minecraft-client")
+        }
+    }
+
+    mavenCentral()
+}
+
+dependencies {
+    // To change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Annotation processor
+    modCompileOnly("org.projectlombok:lombok:${project.lombok_version}")
+    annotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
+
+    // Fabric API. This is technically optional, but you probably want it anyway.
+    // modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    //modImplementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version}:${project.malilib_version}"
+    modImplementation("top.hendrixshen.magiclib:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
+        exclude(group: "carpet", module: "fabric-carpet")
+    }
+    modCompileOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
+
+    modApi("curse.maven:itemscroller-242064:${project.itemscroller_version}")
+    modApi("curse.maven:tweakeroo-297344:${project.tweakeroo_version}")
+
+    modApi("com.github.Nyan-Work.oh-my-minecraft-client:ommc-${project.minecraft_version.replace(".", "_")}:${project.ommc_version}")
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "minecraft_version", project.minecraft_version
+    inputs.property "loader_version", project.loader_version
+    filteringCharset "UTF-8"
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version,
+                "minecraft_version": project.minecraft_version,
+                "loader_version": project.loader_version
+    }
+}
+
+def targetJavaVersion = 17
+tasks.withType(JavaCompile).configureEach {
+    // ensure that the encoding is set to UTF-8, no matter what the system default is
+    // this fixes some edge cases with special characters not displaying correctly
+    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+    // If Javadoc is generated, this must be specified in that task too.
+    it.options.encoding = "UTF-8"
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        it.options.release.set(targetJavaVersion)
+    }
+}
+
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this line, sources will not be generated.
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}"}
+    }
+}
+
+// configure the maven publication
+publishing {
+    publications {
+        create("mavenJava", MavenPublication) {
+            artifactId("${project.mod_id}-${project.minecraft_version.replace(".", "_")}")
+            version("${rootProject.mod_version}")
+            from(components.java)
+        }
+    }
+
+    repositories {
+        mavenLocal()
+
+        maven {
+            url("$rootDir/publish")
+        }
+    }
+}

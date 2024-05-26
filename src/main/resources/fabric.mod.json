@@ -30,6 +30,5 @@
     "malilib": "*",
     "magiclib": "*",
     "minecraft": ">=${minecraft_version}"
-  },
-  "accessWidener" : "dma.accesswidener"
+  }
 }
