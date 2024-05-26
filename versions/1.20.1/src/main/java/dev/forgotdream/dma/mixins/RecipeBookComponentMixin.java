@@ -15,7 +15,6 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,14 +40,14 @@ public abstract class RecipeBookComponentMixin {
     @Shadow
     protected abstract void updateStackedContents();
 
-    @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handlePlaceRecipe(ILnet/minecraft/world/item/crafting/RecipeHolder;Z)V"))
-    public void handlePlaceRecipe(MultiPlayerGameMode instance, int i, RecipeHolder recipeHolder, boolean bl) {
+    @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handlePlaceRecipe(ILnet/minecraft/world/item/crafting/Recipe;Z)V"))
+    public void handlePlaceRecipe(MultiPlayerGameMode instance, int i, Recipe<?> recipe, boolean bl) {
         if (bl && Configs.quickCraftWithRecipeBook) {
             if (minecraft.level != null) {
-                recipe(recipeHolder.value());
+                recipe(recipe);
             }
         } else {
-            Objects.requireNonNull(this.minecraft.gameMode).handlePlaceRecipe(i, recipeHolder,bl);
+            Objects.requireNonNull(this.minecraft.gameMode).handlePlaceRecipe(i, recipe, bl);
         }
     }
 
