@@ -1,3 +1,5 @@
+name: Dev Build
+
 on:
   push:
     paths:
@@ -11,13 +13,13 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [ 17 ]
+        java: [ 21 ]
         os: [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v4
       - name: validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
       - name: setup java ${{ matrix.java }}
