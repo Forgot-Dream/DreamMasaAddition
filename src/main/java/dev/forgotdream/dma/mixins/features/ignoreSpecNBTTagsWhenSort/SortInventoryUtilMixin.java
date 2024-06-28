@@ -23,7 +23,7 @@ public abstract class SortInventoryUtilMixin {
             at = @At(value = "INVOKE", target = "Ljava/util/List;sort(Ljava/util/Comparator;)V", shift = At.Shift.AFTER)
     )
     private static void quickSort(List<ItemStack> itemStacks, int startSlot, int endSlot, CallbackInfoReturnable<List<Tuple<Integer, Integer>>> cir, @Local(ordinal = 2) List<ItemStack> sortedlist) {
-        if (Configs.ignoreSpecNBTTagsWhenSort) {
+        if (Configs.ignoreSpecNBTTagsWhenSort.getBooleanValue()) {
             var fixed_list = itemStacks.stream().filter(SortInventoryUtilMixin::isIgnoredItem).toList();
             sortedlist.removeAll(fixed_list);
             for (var item : fixed_list) {
@@ -35,8 +35,8 @@ public abstract class SortInventoryUtilMixin {
 
     @Unique
     private static boolean isIgnoredItem(ItemStack itemStack) {
-        if (Configs.ignoreSpecNBTTagsWhenSort) {
-            for (var tag : Configs.ignoreSpecNBTTagsList) {
+        if (Configs.ignoreSpecNBTTagsWhenSort.getBooleanValue()) {
+            for (var tag : Configs.ignoreSpecNBTTagsList.getStrings()) {
                 if (itemStack.getTag() != null && itemStack.getTag().contains(tag)) {
                     return true;
                 }

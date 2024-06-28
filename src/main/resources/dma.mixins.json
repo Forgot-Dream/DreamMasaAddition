@@ -5,13 +5,12 @@
   "compatibilityLevel": "JAVA_17",
   "plugin": "top.hendrixshen.magiclib.dependency.impl.MagicMixinPlugin",
   "mixins": [
-    "RecipePatternAccessor",
+    "features.quickCraftWithRecipeBook.RecipePatternAccessor",
     "features.ignoreSpecNBTTagsWhenSort.SortInventoryUtilMixin",
     "fixes.fixTweakerooGammaOverride.ConfigsMixin"
   ],
   "client": [
-    "RecipeBookComponentMixin",
-    "WindowAccessor"
+    "features.quickCraftWithRecipeBook.RecipeBookComponentMixin"
   ],
   "injectors": {
     "defaultRequire": 1

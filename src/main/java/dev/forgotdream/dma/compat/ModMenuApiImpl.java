@@ -2,15 +2,15 @@ package dev.forgotdream.dma.compat;
 
 import dev.forgotdream.dma.Reference;
 import dev.forgotdream.dma.gui.GuiConfigs;
-import top.hendrixshen.magiclib.compat.modmenu.ModMenuCompatApi;
+import top.hendrixshen.magiclib.api.compat.modmenu.ModMenuApiCompat;
 
-public class ModMenuApiImpl implements ModMenuCompatApi {
+public class ModMenuApiImpl implements ModMenuApiCompat {
     @Override
     public ConfigScreenFactoryCompat<?> getConfigScreenFactoryCompat() {
         return (screen) -> {
-            GuiConfigs gui = GuiConfigs.getInstance();
-            gui.setParent(screen);
-            return gui;
+            GuiConfigs configGui = new GuiConfigs();
+            configGui.setParent(screen);
+            return configGui;
         };
     }
 

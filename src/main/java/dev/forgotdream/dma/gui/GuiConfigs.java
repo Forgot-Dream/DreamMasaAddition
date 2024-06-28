@@ -1,16 +1,44 @@
 package dev.forgotdream.dma.gui;
 
 import dev.forgotdream.dma.Reference;
-import dev.forgotdream.dma.config.Configs;
-import lombok.Getter;
-import top.hendrixshen.magiclib.malilib.impl.ConfigManager;
-import top.hendrixshen.magiclib.malilib.impl.gui.ConfigGui;
+import fi.dy.masa.malilib.gui.GuiBase;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import top.hendrixshen.magiclib.api.i18n.I18n;
+import top.hendrixshen.magiclib.impl.malilib.config.gui.MagicConfigGui;
+import top.hendrixshen.magiclib.util.collect.ValueContainer;
 
-public class GuiConfigs extends ConfigGui {
-    @Getter(lazy = true)
-    private static final GuiConfigs instance = new GuiConfigs(Reference.MOD_ID, Configs.ConfigCategory.FEATURE_TOGGLE, Reference.configHandler.configManager);
 
-    public GuiConfigs(String identifier, String defaultTab, ConfigManager configManager) {
-        super(identifier, defaultTab, configManager, () -> Reference.translate("gui.title.configs", Reference.MOD_VERSION));
+public class GuiConfigs extends MagicConfigGui {
+    @Nullable
+    private static GuiConfigs currentInstance = null;
+
+    public GuiConfigs() {
+        super(Reference.MOD_ID, Reference.getConfigManager(), I18n.tr(String.format("%s.config.gui.title", Reference.MOD_ID), Reference.MOD_VERSION));
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        GuiConfigs.currentInstance = this;
+    }
+
+    @Override
+    public void removed() {
+        super.removed();
+        GuiConfigs.currentInstance = null;
+    }
+
+    public static void openGui() {
+        GuiBase.openGui(new GuiConfigs());
+    }
+
+//    @Override
+//    public boolean hideUnAvailableConfigs() {
+//        return Configs.hideUnavailableConfigs.getBooleanValue();
+//    }
+
+    public static @NotNull ValueContainer<GuiConfigs> getCurrentInstance() {
+        return ValueContainer.ofNullable(GuiConfigs.currentInstance);
     }
 }

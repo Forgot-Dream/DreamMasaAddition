@@ -1,6 +1,6 @@
-apply plugin: 'maven-publish'
-apply plugin: 'fabric-loom'
-apply plugin: 'com.replaymod.preprocess'
+apply(plugin: 'maven-publish')
+apply(plugin: 'fabric-loom')
+apply(plugin: 'com.replaymod.preprocess')
 
 preprocess {
     tabIndentation = true
@@ -13,9 +13,9 @@ base {
     archivesName.set("${project.archives_base_name}-${project.minecraft_version}-${project.mod_version}")
 }
 
-//loom{
+loom {
 //    accessWidenerPath=file("src/main/resources/dma.accesswidener")
-//}
+}
 
 repositories {
     // Add repositories to retrieve artifacts from in here.
@@ -24,7 +24,13 @@ repositories {
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html
     // for more information about repositories.
     maven { url 'https://masa.dy.fi/maven' }
-    maven { url 'https://maven.terraformersmc.com/releases/' }
+    maven {
+        url('https://maven.terraformersmc.com/releases/')
+        content {
+            includeGroup("com.terraformersmc")
+        }
+
+    }
     maven {
         name("Curse Maven")
         url("https://www.cursemaven.com")
@@ -47,10 +53,10 @@ repositories {
         name("Jitpack Maven")
         url("https://jitpack.io")
 
-        content {
-            includeGroup("com.github.Nyan-Work")
-            includeGroup("com.github.Nyan-Work.oh-my-minecraft-client")
-        }
+//        content {
+//            includeGroup("com.github.Nyan-Work")
+//            includeGroup("com.github.Nyan-Work.oh-my-minecraft-client")
+//        }
     }
 
     mavenCentral()
@@ -70,10 +76,30 @@ dependencies {
     // modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     //modImplementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version}:${project.malilib_version}"
-    modImplementation("top.hendrixshen.magiclib:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
+//    modImplementation("top.hendrixshen.magiclib:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
+    modApi("top.hendrixshen.magiclib:magiclib-malilib-extra-${project.minecraft_version}-fabric:${project.magiclib_version}") {
         exclude(group: "carpet", module: "fabric-carpet")
+//        exclude(group: "top.hendrixshen.magiclib",module: "magiclib-core-common")
     }
+    modApi("top.hendrixshen.magiclib:magiclib-legacy-compat-${project.minecraft_version}-fabric:${project.magiclib_legacy_compat_version}") {
+        exclude(group: "carpet", module: "fabric-carpet")
+        transitive(false)
+//        exclude(group: "top.hendrixshen.magiclib",module: "magiclib-core-common")
+    }
+
+    implementation ("top.hendrixshen.magiclib:magiclib-core-common:${project.magiclib_core_version}"){
+        transitive(false)
+        artifact{
+           name = "magiclib-core-common"
+            extension = "jar"
+        }
+    }
+
+//    modImplementation(project(path:"top.hendrixshen.magiclib:magiclib-core:fabric:${project.magiclib_core_version}",configuration:"shadow"))
+//    modImplementation project(path:"top.hendrixshen.magiclib:magiclib-core-common:${project.magiclib_core_version}")
+
     modCompileOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
+//    modApi 'org.semver4j:semver4j:5.3.0'
 
     modApi("curse.maven:itemscroller-242064:${project.itemscroller_version}")
     modApi("curse.maven:tweakeroo-297344:${project.tweakeroo_version}")
@@ -82,13 +108,13 @@ dependencies {
 }
 
 processResources {
-    inputs.property "version", project.version
+    inputs.property "version", project.mod_version
     inputs.property "minecraft_version", project.minecraft_version
     inputs.property "loader_version", project.loader_version
     filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version,
+        expand "version": project.mod_version,
                 "minecraft_version": project.minecraft_version,
                 "loader_version": project.loader_version
     }
@@ -119,7 +145,7 @@ java {
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
+        rename { "${it}_${project.archivesBaseName}" }
     }
 }
 

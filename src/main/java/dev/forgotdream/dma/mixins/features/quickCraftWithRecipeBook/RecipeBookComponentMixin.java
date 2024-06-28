@@ -1,4 +1,4 @@
-package dev.forgotdream.dma.mixins;
+package dev.forgotdream.dma.mixins.features.quickCraftWithRecipeBook;
 
 import dev.forgotdream.dma.Reference;
 import dev.forgotdream.dma.config.Configs;
@@ -54,7 +54,7 @@ public abstract class RecipeBookComponentMixin {
 //#else
     @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handlePlaceRecipe(ILnet/minecraft/world/item/crafting/RecipeHolder;Z)V"))
     public void handlePlaceRecipe(MultiPlayerGameMode instance, int i, RecipeHolder recipes, boolean bl) {
-        if (bl && Configs.quickCraftWithRecipeBook) {
+        if (bl && Configs.quickCraftWithRecipeBook.getBooleanValue()) {
             if (minecraft.level != null) {
                 recipe(recipes.value());
             }

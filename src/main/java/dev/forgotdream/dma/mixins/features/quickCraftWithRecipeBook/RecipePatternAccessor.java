@@ -1,4 +1,4 @@
-package dev.forgotdream.dma.mixins;
+package dev.forgotdream.dma.mixins.features.quickCraftWithRecipeBook;
 
 import dev.forgotdream.dma.Reference;
 import fi.dy.masa.itemscroller.recipes.RecipePattern;

@@ -15,7 +15,7 @@ import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
 public class ConfigsMixin {
     @Inject(method = "loadFromFile", at = @At("RETURN"))
     private static void loadFromFile(CallbackInfo ci) {
-        if (dev.forgotdream.dma.config.Configs.fixTweakerooGammaOverride) {
+        if (dev.forgotdream.dma.config.Configs.fixTweakerooGammaOverride.getBooleanValue()) {
             if (FeatureToggle.TWEAK_GAMMA_OVERRIDE.getBooleanValue())
                 FeatureToggle.TWEAK_GAMMA_OVERRIDE.onValueChanged();
         }
