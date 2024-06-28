@@ -47,7 +47,7 @@ public abstract class RecipeBookComponentMixin {
 //#if MC<12004
 //$$ @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handlePlaceRecipe(ILnet/minecraft/world/item/crafting/Recipe;Z)V"))
 //$$    public void handlePlaceRecipe(MultiPlayerGameMode instance, int i, Recipe<?> recipes, boolean bl) {
-//$$        if (bl && Configs.quickCraftWithRecipeBook) {
+//$$        if (bl && Configs.quickCraftWithRecipeBook.getBooleanValue()) {
 //$$            if (minecraft.level != null) {
 //$$                recipe(recipes);
 //$$            }
@@ -60,7 +60,7 @@ public abstract class RecipeBookComponentMixin {
             }
 //#endif
         } else {
-            Objects.requireNonNull(this.minecraft.gameMode).handlePlaceRecipe(i, recipes,bl);
+            Objects.requireNonNull(this.minecraft.gameMode).handlePlaceRecipe(i, recipes, bl);
         }
     }
 
