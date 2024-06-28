@@ -72,34 +72,18 @@ dependencies {
     modCompileOnly("org.projectlombok:lombok:${project.lombok_version}")
     annotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
 
-    // Fabric API. This is technically optional, but you probably want it anyway.
-    // modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    // MagicLibs
+    modApi("top.hendrixshen.magiclib:magiclib-malilib-extra-${project.minecraft_version}-fabric:${project.magiclib_version}")
+    modApi("top.hendrixshen.magiclib:magiclib-legacy-compat-${project.minecraft_version}-fabric:${project.magiclib_legacy_compat_version}")
 
-    //modImplementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version}:${project.malilib_version}"
-//    modImplementation("top.hendrixshen.magiclib:magiclib-${project.minecraft_version.replace(".", "_")}:${project.magiclib_version}") {
-    modApi("top.hendrixshen.magiclib:magiclib-malilib-extra-${project.minecraft_version}-fabric:${project.magiclib_version}") {
-        exclude(group: "carpet", module: "fabric-carpet")
-//        exclude(group: "top.hendrixshen.magiclib",module: "magiclib-core-common")
-    }
-    modApi("top.hendrixshen.magiclib:magiclib-legacy-compat-${project.minecraft_version}-fabric:${project.magiclib_legacy_compat_version}") {
-        exclude(group: "carpet", module: "fabric-carpet")
-        transitive(false)
-//        exclude(group: "top.hendrixshen.magiclib",module: "magiclib-core-common")
-    }
-
-    implementation ("top.hendrixshen.magiclib:magiclib-core-common:${project.magiclib_core_version}"){
-        transitive(false)
-        artifact{
-           name = "magiclib-core-common"
+    implementation("top.hendrixshen.magiclib:magiclib-core-common:${project.magiclib_core_version}") {
+        artifact {
+            name = "magiclib-core-common"
             extension = "jar"
         }
     }
 
-//    modImplementation(project(path:"top.hendrixshen.magiclib:magiclib-core:fabric:${project.magiclib_core_version}",configuration:"shadow"))
-//    modImplementation project(path:"top.hendrixshen.magiclib:magiclib-core-common:${project.magiclib_core_version}")
-
     modCompileOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
-//    modApi 'org.semver4j:semver4j:5.3.0'
 
     modApi("curse.maven:itemscroller-242064:${project.itemscroller_version}")
     modApi("curse.maven:tweakeroo-297344:${project.tweakeroo_version}")
@@ -120,7 +104,7 @@ processResources {
     }
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 21
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly
@@ -130,6 +114,7 @@ tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         it.options.release.set(targetJavaVersion)
     }
+
 }
 
 java {
