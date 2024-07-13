@@ -44,6 +44,9 @@ public abstract class RecipeBookComponentMixin {
     @Shadow
     protected abstract void updateStackedContents();
 
+    @Unique
+    private static  final int MAX_TRIES = 1000;
+
 //#if MC<12004
 //$$ @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handlePlaceRecipe(ILnet/minecraft/world/item/crafting/Recipe;Z)V"))
 //$$    public void handlePlaceRecipe(MultiPlayerGameMode instance, int i, Recipe<?> recipes, boolean bl) {
@@ -68,7 +71,10 @@ public abstract class RecipeBookComponentMixin {
     @Unique
     private void recipe(Recipe<?> recipe) {
         IntList intList = new IntArrayList();
-        while (this.stackedContents.canCraft(recipe, intList)) {
+
+        int i = 0;
+        while (this.stackedContents.canCraft(recipe, intList) && (i < MAX_TRIES)) {
+            ++i;
             var recipeArr = intList.stream().map(StackedContents::fromStackingIndex).toList();
             ItemStack[] recipeArray;
             if (recipe instanceof ShapedRecipe shapedRecipe) {
