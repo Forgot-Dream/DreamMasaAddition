@@ -7,10 +7,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 
-@Dependencies(and = @Dependency(Reference.TWEAKEROO_MOD_ID))
+@Dependencies(require = @Dependency(Reference.TWEAKEROO_MOD_ID))
 @Mixin(value = Configs.class, remap = false)
 public class ConfigsMixin {
     @Inject(method = "loadFromFile", at = @At("RETURN"))

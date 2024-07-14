@@ -11,12 +11,12 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 
 import java.util.List;
 
-@Dependencies(and = @Dependency(Reference.OMMC_MOD_ID))
+@Dependencies(require = @Dependency(Reference.OMMC_MOD_ID))
 @Mixin(value = SortInventoryUtil.class, remap = false)
 public abstract class SortInventoryUtilMixin {
     @Inject(method = "quickSort",

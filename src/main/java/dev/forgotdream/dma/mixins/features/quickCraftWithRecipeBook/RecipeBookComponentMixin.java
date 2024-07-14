@@ -22,8 +22,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependencies;
-import top.hendrixshen.magiclib.dependency.api.annotation.Dependency;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependencies;
+import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 
 import java.util.Objects;
 
@@ -31,7 +31,7 @@ import java.util.Objects;
 import net.minecraft.world.item.crafting.RecipeHolder;
 //#endif
 
-@Dependencies(and = @Dependency(Reference.ITEMSCROLLER_MOD_ID))
+@Dependencies(require = @Dependency(Reference.ITEMSCROLLER_MOD_ID))
 @Mixin(RecipeBookComponent.class)
 public abstract class RecipeBookComponentMixin {
     @Shadow
@@ -45,7 +45,7 @@ public abstract class RecipeBookComponentMixin {
     protected abstract void updateStackedContents();
 
     @Unique
-    private static  final int MAX_TRIES = 1000;
+    private static  final int MAX_TRIES = 100;
 
 //#if MC<12004
 //$$ @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handlePlaceRecipe(ILnet/minecraft/world/item/crafting/Recipe;Z)V"))

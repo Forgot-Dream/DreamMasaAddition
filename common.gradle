@@ -72,23 +72,15 @@ dependencies {
     modCompileOnly("org.projectlombok:lombok:${project.lombok_version}")
     annotationProcessor("org.projectlombok:lombok:${project.lombok_version}")
 
-    // MagicLibs
-    modApi("top.hendrixshen.magiclib:magiclib-malilib-extra-${project.minecraft_version}-fabric:${project.magiclib_version}")
-    modApi("top.hendrixshen.magiclib:magiclib-legacy-compat-${project.minecraft_version}-fabric:${project.magiclib_legacy_compat_version}")
-
-    implementation("top.hendrixshen.magiclib:magiclib-core-common:${project.magiclib_core_version}") {
-        artifact {
-            name = "magiclib-core-common"
-            extension = "jar"
-        }
-    }
-
-    modCompileOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
+    // MagicLib
+    modApi(annotationProcessor("top.hendrixshen.magiclib:magiclib-all-${project.minecraft_version}-fabric:${project.magiclib_version}"))
 
     modApi("curse.maven:itemscroller-242064:${project.itemscroller_version}")
     modApi("curse.maven:tweakeroo-297344:${project.tweakeroo_version}")
 
-    modApi("com.github.Nyan-Work.oh-my-minecraft-client:ommc-${project.minecraft_version.replace(".", "_")}:${project.ommc_version}")
+    modApi("com.github.Nyan-Work.oh-my-minecraft-client:ommc-${project.minecraft_version.replace(".", "_")}:${project.ommc_version}"){
+        transitive(false)
+    }
 }
 
 processResources {
