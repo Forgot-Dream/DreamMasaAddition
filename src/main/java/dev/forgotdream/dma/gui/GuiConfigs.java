@@ -1,7 +1,6 @@
 package dev.forgotdream.dma.gui;
 
 import dev.forgotdream.dma.Reference;
-import fi.dy.masa.malilib.gui.GuiBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.hendrixshen.magiclib.api.i18n.I18n;
@@ -29,11 +28,7 @@ public class GuiConfigs extends MagicConfigGui {
         GuiConfigs.currentInstance = null;
     }
 
-    public static void openGui() {
-        GuiBase.openGui(new GuiConfigs());
-    }
-
-//    @Override
+    //    @Override
 //    public boolean hideUnAvailableConfigs() {
 //        return Configs.hideUnavailableConfigs.getBooleanValue();
 //    }

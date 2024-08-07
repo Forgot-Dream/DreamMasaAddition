@@ -59,6 +59,11 @@ repositories {
 //        }
     }
 
+    maven {
+        name("Nyan Maven")
+        url("https://maven.hendrixshen.top/releases")
+    }
+
     mavenCentral()
 }
 

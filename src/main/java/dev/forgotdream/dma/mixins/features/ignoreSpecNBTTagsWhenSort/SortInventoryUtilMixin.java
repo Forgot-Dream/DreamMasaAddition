@@ -24,7 +24,7 @@ public abstract class SortInventoryUtilMixin {
     )
     private static void quickSort(List<ItemStack> itemStacks, int startSlot, int endSlot, CallbackInfoReturnable<List<Tuple<Integer, Integer>>> cir, @Local(ordinal = 2) List<ItemStack> sortedlist) {
         if (Configs.ignoreSpecNBTTagsWhenSort.getBooleanValue()) {
-            var fixed_list = itemStacks.stream().filter(SortInventoryUtilMixin::isIgnoredItem).toList();
+            var fixed_list = itemStacks.subList(startSlot,endSlot).stream().filter(SortInventoryUtilMixin::isIgnoredItem).toList();
             sortedlist.removeAll(fixed_list);
             for (var item : fixed_list) {
                 int index = itemStacks.indexOf(item);

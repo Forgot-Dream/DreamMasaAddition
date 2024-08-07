@@ -34,9 +34,10 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 @Dependencies(require = @Dependency(Reference.ITEMSCROLLER_MOD_ID))
 @Mixin(RecipeBookComponent.class)
 public abstract class RecipeBookComponentMixin {
+    @Unique
+    private static final int MAX_TRIES = 100;
     @Shadow
     protected Minecraft minecraft;
-
     @Shadow
     @Final
     private StackedContents stackedContents;
@@ -44,22 +45,19 @@ public abstract class RecipeBookComponentMixin {
     @Shadow
     protected abstract void updateStackedContents();
 
-    @Unique
-    private static  final int MAX_TRIES = 100;
-
-//#if MC<12004
+    //#if MC<12004
 //$$ @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handlePlaceRecipe(ILnet/minecraft/world/item/crafting/Recipe;Z)V"))
 //$$    public void handlePlaceRecipe(MultiPlayerGameMode instance, int i, Recipe<?> recipes, boolean bl) {
 //$$        if (bl && Configs.quickCraftWithRecipeBook.getBooleanValue()) {
 //$$            if (minecraft.level != null) {
-//$$                recipe(recipes);
+//$$                recipe(recipes).run();
 //$$            }
 //#else
     @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handlePlaceRecipe(ILnet/minecraft/world/item/crafting/RecipeHolder;Z)V"))
     public void handlePlaceRecipe(MultiPlayerGameMode instance, int i, RecipeHolder recipes, boolean bl) {
         if (bl && Configs.quickCraftWithRecipeBook.getBooleanValue()) {
             if (minecraft.level != null) {
-                recipe(recipes.value());
+                recipe(recipes.value()).run();
             }
 //#endif
         } else {
@@ -69,39 +67,41 @@ public abstract class RecipeBookComponentMixin {
 
 
     @Unique
-    private void recipe(Recipe<?> recipe) {
-        IntList intList = new IntArrayList();
+    private Runnable recipe(Recipe<?> recipe) {
+        return () -> {
+            IntList intList = new IntArrayList();
 
-        int i = 0;
-        while (this.stackedContents.canCraft(recipe, intList) && (i < MAX_TRIES)) {
-            ++i;
-            var recipeArr = intList.stream().map(StackedContents::fromStackingIndex).toList();
-            ItemStack[] recipeArray;
-            if (recipe instanceof ShapedRecipe shapedRecipe) {
-                var recipeIter = recipeArr.iterator();
-                recipeArray = new ItemStack[9];
-                for (int j = 0; j < 9; j++) {
-                    if (j % 3 < shapedRecipe.getWidth() && j / 3 < shapedRecipe.getHeight()) {
-                        recipeArray[j] = recipeIter.next();
-                    } else {
-                        recipeArray[j] = ItemStack.EMPTY;
+            int i = 0;
+            while (this.stackedContents.canCraft(recipe, intList) && (i < MAX_TRIES)) {
+                ++i;
+                var recipeArr = intList.stream().map(StackedContents::fromStackingIndex).toList();
+                ItemStack[] recipeArray;
+                if (recipe instanceof ShapedRecipe shapedRecipe) {
+                    var recipeIter = recipeArr.iterator();
+                    recipeArray = new ItemStack[9];
+                    for (int j = 0; j < 9; j++) {
+                        if (j % 3 < shapedRecipe.getWidth() && j / 3 < shapedRecipe.getHeight()) {
+                            recipeArray[j] = recipeIter.next();
+                        } else {
+                            recipeArray[j] = ItemStack.EMPTY;
+                        }
                     }
+                } else {
+                    recipeArray = recipeArr.toArray(new ItemStack[0]);
                 }
-            } else {
-                recipeArray = recipeArr.toArray(new ItemStack[0]);
+
+
+                RecipePattern recipePattern = new RecipePattern();
+                ((RecipePatternAccessor) recipePattern).setRecipe(recipeArray);
+                ((RecipePatternAccessor) recipePattern).setResult(recipe.getResultItem(minecraft.level.registryAccess()));
+
+                if (GuiUtils.getCurrentScreen() != null) {
+                    InventoryUtils.craftEverythingPossibleWithCurrentRecipe(recipePattern, (AbstractContainerScreen<? extends AbstractContainerMenu>) GuiUtils.getCurrentScreen());
+                }
+
+                this.updateStackedContents();
             }
-
-
-            RecipePattern recipePattern = new RecipePattern();
-            ((RecipePatternAccessor) recipePattern).setRecipe(recipeArray);
-            ((RecipePatternAccessor) recipePattern).setResult(recipe.getResultItem(minecraft.level.registryAccess()));
-
-            if (GuiUtils.getCurrentScreen() != null) {
-                InventoryUtils.craftEverythingPossibleWithCurrentRecipe(recipePattern, (AbstractContainerScreen<? extends AbstractContainerMenu>) GuiUtils.getCurrentScreen());
-            }
-
-            this.updateStackedContents();
-        }
+        };
     }
 
 }
