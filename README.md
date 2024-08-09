@@ -12,7 +12,7 @@ Just some tweaks that I want to add.
 ## Dependenies
 
 - Minecraft 1.20.1-1.20.2,1.20.4
-- [MagicLib](https://github.com/Hendrix-Shen/MagicLib) >= 0.8.552+16d035d
+- [MagicLib](https://github.com/Hendrix-Shen/MagicLib) >= 0.8.585-stable
 
 ## Development
 
