@@ -24,11 +24,17 @@ public class Configs {
     @Config(category = ConfigCategory.FEATURE_TOGGLE)
     public static MagicConfigBoolean quickCraftWithRecipeBook = Configs.cf.newConfigBoolean("quickCraftWithRecipeBook", false);
 
-    @Dependencies(require = @Dependency(Reference.OMMC_MOD_ID))
+    @Dependencies(require = {
+            @Dependency(value = Reference.OMMC_MOD_ID,optional = true),
+            @Dependency(value = Reference.ITEMSCROLLER_MOD_ID,optional = true)
+    })
     @Config(category = ConfigCategory.FEATURE_TOGGLE)
     public static MagicConfigBoolean ignoreSpecNBTTagsWhenSort = Configs.cf.newConfigBoolean("ignoreSpecNBTTagsWhenSort", false);
 
-    @Dependencies(require = @Dependency(Reference.OMMC_MOD_ID))
+    @Dependencies(require = {
+            @Dependency(value = Reference.OMMC_MOD_ID,optional = true),
+            @Dependency(value = Reference.ITEMSCROLLER_MOD_ID,optional = true)
+    })
     @Config(category = ConfigCategory.LISTS)
     public static MagicConfigStringList ignoreSpecNBTTagsList = Configs.cf.newConfigStringList("ignoreSpecNBTTagsList", ImmutableList.of("GcaClear"));
 

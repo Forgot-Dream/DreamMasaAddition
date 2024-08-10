@@ -5,8 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "plugin": "top.hendrixshen.magiclib.impl.mixin.MagicMixinPlugin",
   "mixins": [
-    "features.quickCraftWithRecipeBook.RecipePatternAccessor",
+    "features.ignoreSpecNBTTagsWhenSort.InventoryUtilsAccessor",
+    "features.ignoreSpecNBTTagsWhenSort.InventoryUtilsMixin",
     "features.ignoreSpecNBTTagsWhenSort.SortInventoryUtilMixin",
+    "features.quickCraftWithRecipeBook.RecipePatternAccessor",
     "fixes.fixTweakerooGammaOverride.ConfigsMixin"
   ],
   "client": [

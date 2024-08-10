@@ -7,8 +7,10 @@ plugins {
 preprocess {
     def mc1201 = createNode("1.20.1", 1_20_01, "mojang")
     def mc1204 = createNode("1.20.4", 1_20_04, "mojang")
-//    def mc1206 = createNode("1.20.6", 1_20_06, "mojang")
+    def mc1206 = createNode("1.20.6", 1_20_06, "mojang")
+    def mc1210 = createNode("1.21.0", 1_21_00, "mojang")
 
     mc1201.link(mc1204, null)
-//    mc1204.link(mc1206, null)
+    mc1204.link(mc1206, null)
+    mc1210.link(mc1206, null)
 }

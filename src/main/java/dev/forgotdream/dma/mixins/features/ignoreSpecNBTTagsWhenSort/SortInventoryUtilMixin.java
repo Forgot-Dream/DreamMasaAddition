@@ -1,13 +1,13 @@
 package dev.forgotdream.dma.mixins.features.ignoreSpecNBTTagsWhenSort;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import com.plusls.ommc.feature.sortInventory.SortInventoryUtil;
 import dev.forgotdream.dma.Reference;
 import dev.forgotdream.dma.config.Configs;
+import dev.forgotdream.dma.features.ignoreSpecNBTTagsWhenSort.ignoreNBTSortUtil;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -16,32 +16,26 @@ import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 
 import java.util.List;
 
-@Dependencies(require = @Dependency(Reference.OMMC_MOD_ID))
-@Mixin(value = SortInventoryUtil.class, remap = false)
+//import com.plusls.ommc.feature.sortInventory.SortInventoryUtil;
+@SuppressWarnings({"UnresolvedMixinReference", "UnusedMixin"})
+@Dependencies(require = {
+        @Dependency(Reference.OMMC_MOD_ID),
+        @Dependency(value = Reference.MINECRAFT_ID, versionPredicates = "<1.20.6")
+})
+@Pseudo
+@Mixin(targets = "com.plusls.ommc.feature.sortInventory.SortInventoryUtil")
 public abstract class SortInventoryUtilMixin {
     @Inject(method = "quickSort",
-            at = @At(value = "INVOKE", target = "Ljava/util/List;sort(Ljava/util/Comparator;)V", shift = At.Shift.AFTER)
+            at = @At(value = "INVOKE", target = "Ljava/util/List;sort(Ljava/util/Comparator;)V", shift = At.Shift.AFTER),
+            remap = false
     )
     private static void quickSort(List<ItemStack> itemStacks, int startSlot, int endSlot, CallbackInfoReturnable<List<Tuple<Integer, Integer>>> cir, @Local(ordinal = 2) List<ItemStack> sortedlist) {
         if (Configs.ignoreSpecNBTTagsWhenSort.getBooleanValue()) {
-            var fixed_list = itemStacks.subList(startSlot,endSlot).stream().filter(SortInventoryUtilMixin::isIgnoredItem).toList();
+            // 需要固定的物品
+            var fixed_list = itemStacks.subList(startSlot, endSlot).stream().filter(ignoreNBTSortUtil::isIgnoredItem).toList();
+            // 从已经排序的列表删去需要固定的物品，即将需要固定的物品从排序队列中剔除
             sortedlist.removeAll(fixed_list);
-            for (var item : fixed_list) {
-                int index = itemStacks.indexOf(item);
-                sortedlist.add(index, item);
-            }
+            fixed_list.forEach((item) -> sortedlist.add(itemStacks.indexOf(item), item));
         }
-    }
-
-    @Unique
-    private static boolean isIgnoredItem(ItemStack itemStack) {
-        if (Configs.ignoreSpecNBTTagsWhenSort.getBooleanValue()) {
-            for (var tag : Configs.ignoreSpecNBTTagsList.getStrings()) {
-                if (itemStack.getTag() != null && itemStack.getTag().contains(tag)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

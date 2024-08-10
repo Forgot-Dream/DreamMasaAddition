@@ -20,6 +20,7 @@ public class Reference {
     public static final String ITEMSCROLLER_MOD_ID = "itemscroller";
     public static final String TWEAKEROO_MOD_ID = "tweakeroo";
     public static final String OMMC_MOD_ID = "ommc";
+    public static final String MINECRAFT_ID = "minecraft";
 
 
     @Getter
