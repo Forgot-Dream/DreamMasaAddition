@@ -1,6 +1,9 @@
 # DreamMasaAddition
 
-Just some tweaks that I want to add.
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/dma?label=Modrinth%20Downloads&logo=Modrinth%20Downloads&style=flat-square)](https://modrinth.com/mod/dma)
+[![Dev Build](https://img.shields.io/github/actions/workflow/status/Forgot-Dream/DreamMasaAddition/DevBuild.yml?label=Last%20build&style=flat-square)](https://github.com/Forgot-Dream/DreamMasaAddition/actions/workflows/DevBuild.yml)
+
+**Just some tweaks that I want to add.**
 
 ## Features
 
@@ -11,8 +14,15 @@ Just some tweaks that I want to add.
 
 ## Dependenies
 
-- Minecraft 1.20.1-1.20.2,1.20.4
 - [MagicLib](https://github.com/Hendrix-Shen/MagicLib) >= 0.8.585-stable
+- Java 21+
+
+## Supported Minecraft Version
+
+- 1.20.1 
+- 1.20.4
+- 1.20.6 **(Untested)**
+- 1.21 **(Mainly)**
 
 ## Development
 
