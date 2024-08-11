@@ -11,7 +11,7 @@
   "dma.config.option.quickCraftWithRecipeBook.name": "合成书快速合成",
   "dma.config.option.quickCraftWithRecipeBook.comment": "按住Shift单击合成书中的表项时，会一次性将背包内可用物品全部合成为该表项。此功能依赖于ItemScroller。",
   "dma.config.option.ignoreSpecNBTTagsWhenSort.name": "整理物品时忽略指定NBT标签的物品",
-  "dma.config.option.ignoreSpecNBTTagsWhenSort.comment": "使用OMMC时，整理物品时忽略指定NBT标签的物品",
+  "dma.config.option.ignoreSpecNBTTagsWhenSort.comment": "使用OMMC(MC<=1.20.4)/ItemScroller(MC>=1.21)时，整理物品时忽略指定NBT标签的物品",
 
   "dma.config.option.ignoreSpecNBTTagsList.name": "整理时忽略的NBT标签",
   "dma.config.option.ignoreSpecNBTTagsList.comment": "整理时忽略的NBT标签名字，如果物品含有该名字的标签，则忽略。",

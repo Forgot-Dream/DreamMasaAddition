@@ -68,15 +68,15 @@ repositories {
 }
 
 def apiDependencies = [
-        ["curse.maven:itemscroller-242064"     , "itemscroller", mcVersion < 12100, false],
+        ["curse.maven:itemscroller-242064", "itemscroller", mcVersion < 12100, false],
 //        ["curse.maven:litematica-308892"       , "litematica"  , mcVersion < 12100, false],
 //        ["curse.maven:minihud-244260"          , "minihud"     , mcVersion < 12100, false],
-        ["curse.maven:tweakeroo-297344"        , "tweakeroo"   , mcVersion < 12100, false],
+        ["curse.maven:tweakeroo-297344", "tweakeroo", mcVersion < 12100, false],
         ["com.github.sakura-ryoko:itemscroller", "itemscroller", mcVersion > 12006, false],
 //        ["com.github.sakura-ryoko:litematica"  , "litematica"  , mcVersion > 12006, false],
 //        ["com.github.sakura-ryoko:minihud"     , "minihud"     , mcVersion > 12006, false],
-        ["com.github.sakura-ryoko:tweakeroo"   , "tweakeroo"   , mcVersion > 12006, false],
-        ["com.github.Nyan-Work.oh-my-minecraft-client:ommc-${project.minecraft_version.replace(".", "_")}","ommc",mcVersion<12006,false]
+        ["com.github.sakura-ryoko:tweakeroo", "tweakeroo", mcVersion > 12006, false],
+        ["com.github.Nyan-Work.oh-my-minecraft-client:ommc-${project.minecraft_version.replace(".", "_")}", "ommc", mcVersion < 12006, false]
 ]
 
 dependencies {
@@ -91,13 +91,6 @@ dependencies {
 
     // MagicLib
     modApi(annotationProcessor("top.hendrixshen.magiclib:magiclib-all-${project.name}-fabric:${project.magiclib_version}"))
-
-//    modApi("curse.maven:itemscroller-242064:${project.itemscroller_version}")
-//    modApi("curse.maven:tweakeroo-297344:${project.tweakeroo_version}")
-
-//    modApi("com.github.Nyan-Work.oh-my-minecraft-client:ommc-${project.minecraft_version.replace(".", "_")}:${project.ommc_version}"){
-//        transitive(false)
-//    }
 
     apiDependencies.forEach { item ->
         String dependencyNotation = item[0]
