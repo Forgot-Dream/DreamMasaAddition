@@ -19,7 +19,7 @@
 
 ## Supported Minecraft Version
 
-- 1.20.1 
+- 1.20.1
 - 1.20.4
 - 1.20.6 **(Untested)**
 - 1.21 **(Mainly)**

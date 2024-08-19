@@ -33,6 +33,9 @@ public class ignoreNBTSortUtil {
     }
 
 //#if MC>12006
+    /**
+     * quickSort() modified from fi.dy.masa.itemscroller.util.InventoryUtils#quickSort(AbstractContainerScreen, int, int)
+     */
     public static void quickSort(AbstractContainerScreen<?> gui, int start, int end) {
         var itemList = gui.getMenu().getItems();
         var ignoredList = itemList.subList(start, end).stream().filter(ignoreNBTSortUtil::isIgnoredItem).map(itemList::indexOf).toList();

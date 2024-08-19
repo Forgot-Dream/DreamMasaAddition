@@ -29,13 +29,14 @@ public abstract class SortInventoryUtilMixin {
             at = @At(value = "INVOKE", target = "Ljava/util/List;sort(Ljava/util/Comparator;)V", shift = At.Shift.AFTER),
             remap = false
     )
-    private static void quickSort(List<ItemStack> itemStacks, int startSlot, int endSlot, CallbackInfoReturnable<List<Tuple<Integer, Integer>>> cir, @Local(ordinal = 2) List<ItemStack> sortedlist) {
+    private static void quickSort(List<ItemStack> originItemList, int startSlot, int endSlot, CallbackInfoReturnable<List<Tuple<Integer, Integer>>> cir, @Local(ordinal = 2) List<ItemStack> sortedlist) {
         if (Configs.ignoreSpecNBTTagsWhenSort.getBooleanValue()) {
             // 需要固定的物品
-            var fixed_list = itemStacks.subList(startSlot, endSlot).stream().filter(ignoreNBTSortUtil::isIgnoredItem).toList();
+            var fixed_list = originItemList.subList(startSlot, endSlot).stream().filter(ignoreNBTSortUtil::isIgnoredItem).toList();
             // 从已经排序的列表删去需要固定的物品，即将需要固定的物品从排序队列中剔除
             sortedlist.removeAll(fixed_list);
-            fixed_list.forEach((item) -> sortedlist.add(itemStacks.indexOf(item), item));
+            // 将固定列表修改回原位置
+            fixed_list.forEach((item) -> sortedlist.add(originItemList.indexOf(item), item));
         }
     }
 }
