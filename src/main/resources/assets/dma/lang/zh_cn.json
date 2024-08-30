@@ -2,9 +2,13 @@
   "dma.config.gui.title": "Dream Masa Addition - 设置 - 版本: %s",
 
   "dma.config.category.all.name": "全部",
+  "dma.config.category.generic.name": "通用",
   "dma.config.category.feature_toggle.name": "特性开关",
   "dma.config.category.lists.name": "列表",
   "dma.config.category.fixes.name": "修复",
+
+  "dma.config.option.openConfigGui.name": "打开配置界面",
+  "dma.config.option.openConfigGui.comment": "",
 
   "dma.config.option.windowResizable.name": "游戏窗口大小可变",
   "dma.config.option.windowResizable.comment": "设置游戏窗口大小是否可以改变",

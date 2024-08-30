@@ -2,9 +2,13 @@
   "dma.config.gui.title": "Dream Masa Addition - Config - Version: %s",
 
   "dma.config.category.all.name": "All",
+  "dma.config.category.generic.name": "Generic",
   "dma.config.category.feature_toggle.name": "Feature Toggles",
   "dma.config.category.lists.name": "Lists",
   "dma.config.category.fixes.name": "Fixes",
+
+  "dma.config.option.openConfigGui.name": "openConfigGui",
+  "dma.config.option.openConfigGui.comment": "",
 
   "dma.config.option.windowResizable.name": "windowResizable",
   "dma.config.option.windowResizable.comment": "Set whether the game window size can be changed.",

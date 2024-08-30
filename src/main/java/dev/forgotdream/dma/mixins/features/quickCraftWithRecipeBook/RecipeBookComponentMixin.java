@@ -9,6 +9,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.CraftingScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.world.entity.player.StackedContents;
@@ -78,9 +79,19 @@ public abstract class RecipeBookComponentMixin {
                 ItemStack[] recipeArray;
                 if (recipe instanceof ShapedRecipe shapedRecipe) {
                     var recipeIter = recipeArr.iterator();
-                    recipeArray = new ItemStack[9];
-                    for (int j = 0; j < 9; j++) {
-                        if (j % 3 < shapedRecipe.getWidth() && j / 3 < shapedRecipe.getHeight()) {
+
+                    int recipeSize;
+                    if (shapedRecipe.getWidth() > 2
+                            || shapedRecipe.getHeight() > 2
+                            || GuiUtils.getCurrentScreen() instanceof CraftingScreen)
+                        recipeSize = 3;
+                    else
+                        recipeSize = 2;
+
+                    recipeArray = new ItemStack[recipeSize * recipeSize];
+
+                    for (int j = 0; j < recipeSize * recipeSize; j++) {
+                        if (j % recipeSize < shapedRecipe.getWidth() && j / recipeSize < shapedRecipe.getHeight()) {
                             recipeArray[j] = recipeIter.next();
                         } else {
                             recipeArray[j] = ItemStack.EMPTY;
@@ -94,6 +105,7 @@ public abstract class RecipeBookComponentMixin {
                 RecipePattern recipePattern = new RecipePattern();
                 ((RecipePatternAccessor) recipePattern).setRecipe(recipeArray);
                 ((RecipePatternAccessor) recipePattern).setResult(recipe.getResultItem(minecraft.level.registryAccess()));
+
 
                 if (GuiUtils.getCurrentScreen() != null) {
                     InventoryUtils.craftEverythingPossibleWithCurrentRecipe(recipePattern, (AbstractContainerScreen<? extends AbstractContainerMenu>) GuiUtils.getCurrentScreen());
