@@ -19,7 +19,7 @@ import java.util.List;
 //import com.plusls.ommc.feature.sortInventory.SortInventoryUtil;
 @SuppressWarnings({"UnresolvedMixinReference", "UnusedMixin"})
 @Dependencies(require = {
-        @Dependency(Reference.OMMC_MOD_ID),
+        @Dependency(value = Reference.OMMC_MOD_ID,optional = true),
         @Dependency(value = Reference.MINECRAFT_ID, versionPredicates = "<1.20.6")
 })
 @Pseudo
