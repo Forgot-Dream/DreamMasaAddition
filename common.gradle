@@ -2,10 +2,6 @@ apply(plugin: 'maven-publish')
 apply(plugin: 'fabric-loom')
 apply(plugin: 'com.replaymod.preprocess')
 
-preprocess {
-    tabIndentation = true
-}
-
 group(project.maven_group)
 version(project.parent.version)
 

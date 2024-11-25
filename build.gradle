@@ -1,16 +1,41 @@
 plugins {
-    id 'fabric-loom' version '1.7-SNAPSHOT' apply false
+    id 'fabric-loom' version '1.8-SNAPSHOT' apply false
     id 'maven-publish'
-    id 'com.replaymod.preprocess' version 'ce1aeb2b'
+    id 'com.replaymod.preprocess' version '8de9ff8bf3'
 }
 
 preprocess {
     def mc1201 = createNode("1.20.1", 1_20_01, "mojang")
     def mc1204 = createNode("1.20.4", 1_20_04, "mojang")
     def mc1206 = createNode("1.20.6", 1_20_06, "mojang")
-    def mc1210 = createNode("1.21.0", 1_21_00, "mojang")
+    def mc1211 = createNode("1.21.1", 1_21_01, "mojang")
 
     mc1201.link(mc1204, null)
     mc1204.link(mc1206, null)
-    mc1210.link(mc1206, null)
+    mc1211.link(mc1206, null)
+}
+
+tasks.register('buildAndGather') {
+    subprojects {
+        dependsOn project.tasks.named('build').get()
+    }
+    doFirst {
+        println 'Gathering builds'
+        def buildLibs = {
+            p -> p.buildDir.toPath().resolve('libs')
+        }
+        delete fileTree(buildLibs(rootProject)) {
+            include '*'
+        }
+        subprojects {
+            copy {
+                from(buildLibs(project)) {
+                    include '*.jar'
+                    exclude '*-dev.jar', '*-sources.jar', '*-shadow.jar'
+                }
+                into buildLibs(rootProject)
+                duplicatesStrategy DuplicatesStrategy.INCLUDE
+            }
+        }
+    }
 }
