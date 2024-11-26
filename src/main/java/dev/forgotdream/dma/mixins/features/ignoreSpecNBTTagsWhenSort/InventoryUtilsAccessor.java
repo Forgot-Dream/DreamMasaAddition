@@ -19,7 +19,7 @@ import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 public interface InventoryUtilsAccessor {
 //#if MC>12006
     @Invoker("compareStacks")
-    static int invokeCompareStacks(ItemStack stack1, ItemStack stack2) {
+    static int invokeCompareStacks(ItemStack stack1, ItemStack stack2, boolean shulkerBoxFix) {
         throw new AssertionError();
     }
 //#endif

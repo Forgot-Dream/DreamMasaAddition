@@ -37,6 +37,6 @@ public class Reference {
     }
 
     public static @NotNull MutableComponentCompat translatable(String key, Object... objects) {
-        return ComponentCompat.translatable(Reference.MOD_ID + "." + key, objects);
+        return ComponentCompat.translatableCompat(Reference.MOD_ID + "." + key, objects);
     }
 }

@@ -45,4 +45,4 @@ for (String version : versions) {
     proj.buildFileName = "../../common.gradle"
 }
 
-include(":fabricWrapper")
+//include(":fabricWrapper")

@@ -22,9 +22,9 @@ import top.hendrixshen.magiclib.api.dependency.annotation.Dependency;
 public abstract class InventoryUtilsMixin {
     //#if MC>12006
     @Inject(method = "quickSort", at = @At(value = "HEAD"), remap = false, cancellable = true)
-    private static void redirectQuickSort$dma(AbstractContainerScreen<?> gui, int start, int end, CallbackInfo ci) {
+    private static void redirectQuickSort$dma(AbstractContainerScreen<?> gui, int start, int end, boolean shulkerBoxFix, CallbackInfo ci) {
         if (Configs.ignoreSpecNBTTagsWhenSort.getBooleanValue()) {
-            ignoreNBTSortUtil.quickSort(gui, start, end);
+            ignoreNBTSortUtil.quickSort(gui, start, end,shulkerBoxFix);
             ci.cancel();
         }
     }
