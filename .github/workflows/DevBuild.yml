@@ -39,9 +39,9 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
       - name: build
-        run: ./gradlew build
+        run: ./gradlew buildAndGather
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts
-          path: versions/*/build/libs/
+          name: CI-\#${{github.run_number}}
+          path: build/
