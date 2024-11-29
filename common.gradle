@@ -48,11 +48,6 @@ repositories {
     maven {
         name("Jitpack Maven")
         url("https://jitpack.io")
-
-//        content {
-//            includeGroup("com.github.Nyan-Work")
-//            includeGroup("com.github.Nyan-Work.oh-my-minecraft-client")
-//        }
     }
 
     maven {
