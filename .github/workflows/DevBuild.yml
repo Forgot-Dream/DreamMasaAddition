@@ -43,5 +43,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: CI-\#${{github.run_number}}
+          name: CI-#${{github.run_number}}
           path: build/
