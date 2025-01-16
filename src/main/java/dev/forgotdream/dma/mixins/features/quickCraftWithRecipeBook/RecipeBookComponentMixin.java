@@ -60,12 +60,12 @@ public abstract class RecipeBookComponentMixin {
             if (minecraft.level != null) {
                 recipe(recipes.value()).run();
             }
-
+//#endif
         } else {
             Objects.requireNonNull(this.minecraft.gameMode).handlePlaceRecipe(i, recipes, bl);
         }
     }
-//#endif
+
 
     @Unique
     private Runnable recipe(Recipe<?> recipe) {
