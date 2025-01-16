@@ -46,26 +46,26 @@ public abstract class RecipeBookComponentMixin {
     @Shadow
     protected abstract void updateStackedContents();
 
-    //#if MC<12004
+//#if MC<12004
 //$$ @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handlePlaceRecipe(ILnet/minecraft/world/item/crafting/Recipe;Z)V"))
 //$$    public void handlePlaceRecipe(MultiPlayerGameMode instance, int i, Recipe<?> recipes, boolean bl) {
 //$$        if (bl && Configs.quickCraftWithRecipeBook.getBooleanValue()) {
 //$$            if (minecraft.level != null) {
 //$$                recipe(recipes).run();
 //$$            }
-//#else
+//#elseif MC<12103
     @Redirect(method = "mouseClicked", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;handlePlaceRecipe(ILnet/minecraft/world/item/crafting/RecipeHolder;Z)V"))
     public void handlePlaceRecipe(MultiPlayerGameMode instance, int i, RecipeHolder recipes, boolean bl) {
         if (bl && Configs.quickCraftWithRecipeBook.getBooleanValue()) {
             if (minecraft.level != null) {
                 recipe(recipes.value()).run();
             }
-//#endif
+
         } else {
             Objects.requireNonNull(this.minecraft.gameMode).handlePlaceRecipe(i, recipes, bl);
         }
     }
-
+//#endif
 
     @Unique
     private Runnable recipe(Recipe<?> recipe) {

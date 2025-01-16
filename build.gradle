@@ -11,10 +11,12 @@ preprocess {
     def mc1204 = createNode("1.20.4", 1_20_04, "mojang")
     def mc1206 = createNode("1.20.6", 1_20_06, "mojang")
     def mc1211 = createNode("1.21.1", 1_21_01, "mojang")
+    def mc1213 = createNode("1.21.3", 1_21_03, "mojang")
 
     mc1201.link(mc1204, null)
     mc1204.link(mc1206, null)
     mc1211.link(mc1206, null)
+    mc1213.link(mc1211, null)
 }
 
 tasks.register('buildAndGather') {
