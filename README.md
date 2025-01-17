@@ -14,15 +14,17 @@
 
 ## Dependenies
 
-- [MagicLib](https://github.com/Hendrix-Shen/MagicLib) >= 0.8.585-stable
+- [MagicLib](https://github.com/Hendrix-Shen/MagicLib) >= 0.8.662-stable
 - Java 21+
+- **(Optional)** ItemScroller 0.24.55+
 
 ## Supported Minecraft Version
 
 - 1.20.1
 - 1.20.4
 - 1.20.6 **(Untested)**
-- 1.21 **(Mainly)**
+- 1.21(.1) **(Mainly)**
+- 1.21.3
 
 ## Development
 
